@@ -5,7 +5,10 @@
   <p>Cast</p>
   <ul>
     {{#each cast}}
-      <li>{{name}}, {{occupation}} - <em>{{catchPhrase}}</em></li>
+      <li><a href='/celebrities/{{id}}'>{{name}}</a>,
+        {{occupation}}
+        -
+        <em>{{catchPhrase}}</em></li>
     {{/each}}
   </ul>
   <a href='/movies/{{id}}/edit'>Edit</a>

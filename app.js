@@ -30,7 +30,7 @@ const index = require('./routes/index')
 app.use('/', index)
 
 const celebritiesRoutes = require('./routes/celebrities.routes')
-app.use('/celebrities/', celebritiesRoutes)
+app.use('/celebrities', celebritiesRoutes)
 const moviesRoutes = require('./routes/movies.routes')
 app.use('/movies', moviesRoutes)
 
