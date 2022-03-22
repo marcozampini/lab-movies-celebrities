@@ -9,10 +9,19 @@ router.get('/create', (req, res, next) => {
 router.post('/create', async (req, res, next) => {
   try {
     await Celebrity.create(req.body)
-    res.redirect('/')
+    res.redirect(`${req.baseUrl}`)
   } catch (error) {
     console.log(error)
-    res.redirect('/create')
+    res.redirect(`${req.baseUrl}/create`)
+  }
+})
+
+router.get('/', async (req, res, next) => {
+  try {
+    const celebrities = await Celebrity.find()
+    res.render('celebrities/celebrities', { celebrities })
+  } catch (error) {
+    next(error)
   }
 })
 
