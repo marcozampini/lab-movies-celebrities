@@ -31,6 +31,15 @@ router.get('/:id', async (req, res, next) => {
     res.redirect(`${req.baseUrl}`)
   }
 })
+router.post('/:id/delete', async (req, res, next) => {
+  try {
+    const movie = await Movie.findByIdAndDelete(req.params.id)
+    res.redirect(`${req.baseUrl}`)
+  } catch (error) {
+    console.log(error)
+    res.redirect(`${req.baseUrl}`)
+  }
+})
 
 router.get('/', async (req, res, next) => {
   try {
