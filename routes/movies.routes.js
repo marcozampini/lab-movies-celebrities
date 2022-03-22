@@ -24,7 +24,7 @@ router.post('/create', async (req, res, next) => {
 
 router.get('/', async (req, res, next) => {
   try {
-    const movies = await Movie.find()
+    const movies = await Movie.find().populate('cast')
     res.render('movies/movies', { movies })
   } catch (error) {
     next(error)
