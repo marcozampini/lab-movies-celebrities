@@ -40,7 +40,31 @@ router.post('/:id/delete', async (req, res, next) => {
     res.redirect(`${req.baseUrl}`)
   }
 })
-
+router.get('/:id/edit', async (req, res, next) => {
+  try {
+    const celebrities = await Celebrity.find()
+    const movie = await Movie.findById(req.params.id).populate('cast')
+    for (let actor of movie.cast) {
+      let actingCelebrity = celebrities.find((obj) => {
+        return obj.id === actor.id
+      })
+      actingCelebrity.selected = true
+      console.log(actingCelebrity.selected)
+    }
+    res.render('movies/edit-movie', { movie, celebrities })
+  } catch (error) {
+    next(error)
+  }
+})
+router.post('/:id/edit', async (req, res, next) => {
+  try {
+    const movie = await Movie.findByIdAndUpdate(req.params.id, req.body)
+    res.redirect(`${req.baseUrl}`)
+  } catch (error) {
+    console.log(error)
+    res.redirect(`${req.baseUrl}`)
+  }
+})
 router.get('/', async (req, res, next) => {
   try {
     const movies = await Movie.find().populate('cast')
